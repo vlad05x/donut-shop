@@ -9,7 +9,25 @@ import { ShoppingBag } from "lucide-react"
 import { useShop } from "@/context/shop-context"
 import { toast } from "@/components/ui/use-toast"
 
-// Topping types
+// Типы для топпингов
+interface Glaze {
+  id: string
+  name: string
+  color: string
+}
+
+interface Sprinkle {
+  id: string
+  name: string
+  color: string
+}
+
+interface Topping {
+  id: string
+  name: string
+  color: string
+}
+
 const toppings = {
   glazes: [
     { id: "chocolate", name: "Chocolate", color: "bg-amber-900" },
@@ -29,15 +47,18 @@ const toppings = {
   ],
 }
 
-function Donut({ glaze, sprinkles, topping }) {
+interface DonutProps {
+  glaze: Glaze | null
+  sprinkles: Sprinkle | null
+  topping: Topping | null
+}
+
+function Donut({ glaze, sprinkles, topping }: DonutProps) {
   return (
     <div className="relative w-64 h-64 mx-auto">
-      {/* Base donut */}
       <div className="absolute inset-0 rounded-full bg-amber-300 dark:bg-amber-400 flex items-center justify-center">
         <div className="w-1/3 h-1/3 rounded-full bg-white dark:bg-zinc-900"></div>
       </div>
-
-      {/* Glaze */}
       {glaze && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -48,8 +69,6 @@ function Donut({ glaze, sprinkles, topping }) {
           <div className="w-1/3 h-1/3 rounded-full bg-white dark:bg-zinc-900"></div>
         </motion.div>
       )}
-
-      {/* Sprinkles */}
       {sprinkles && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -76,7 +95,6 @@ function Donut({ glaze, sprinkles, topping }) {
         </motion.div>
       )}
 
-      {/* Topping */}
       {topping && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -108,25 +126,24 @@ function Donut({ glaze, sprinkles, topping }) {
 }
 
 export default function DonutBuilder() {
-  const [selectedGlaze, setSelectedGlaze] = useState(null)
-  const [selectedSprinkles, setSelectedSprinkles] = useState(null)
-  const [selectedTopping, setSelectedTopping] = useState(null)
+  const [selectedGlaze, setSelectedGlaze] = useState<Glaze | null>(null)
+  const [selectedSprinkles, setSelectedSprinkles] = useState<Sprinkle | null>(null)
+  const [selectedTopping, setSelectedTopping] = useState<Topping | null>(null)
   const { addToCart } = useShop()
 
-  // Simplified approach without DND library to avoid potential React errors
-  const handleItemClick = (type, item) => {
+  const handleItemClick = (type: "glaze" | "sprinkles" | "topping", item: Glaze | Sprinkle | Topping) => {
     if (type === "glaze") {
-      setSelectedGlaze(item)
+      setSelectedGlaze(item as Glaze)
     } else if (type === "sprinkles") {
-      setSelectedSprinkles(item)
+      setSelectedSprinkles(item as Sprinkle)
     } else if (type === "topping") {
-      setSelectedTopping(item)
+      setSelectedTopping(item as Topping)
     }
   }
 
   const handleAddCustomDonut = () => {
     const customDonut = {
-      id: 100 + Math.floor(Math.random() * 900), // Generate a random ID for the custom donut
+      id: 100 + Math.floor(Math.random() * 900), 
       name: "Custom Donut",
       price: 6.99,
       image: "/placeholder.svg?height=300&width=300",
@@ -141,7 +158,7 @@ export default function DonutBuilder() {
   }
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 items-center">
+    <div id="#donut-builder" className="grid md:grid-cols-2 gap-8 items-center">
       <div className="bg-white dark:bg-zinc-800 rounded-xl p-6 shadow-lg border border-pink-100 dark:border-pink-900">
         <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-pink-50 to-amber-50 dark:from-pink-900/30 dark:to-amber-900/30 flex items-center justify-center">
           <Donut glaze={selectedGlaze} sprinkles={selectedSprinkles} topping={selectedTopping} />

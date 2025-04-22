@@ -23,10 +23,9 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Shop", href: "/shop" },
-    { name: "Build-A-Donut", href: "/builder" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: "Shop", href: "/#products" },
+    { name: "Build-A-Donut", href: "/#donut-builder" },
+    { name: "Contact", href: "/#footer" },
   ]
 
   const logoVariants = {
@@ -55,7 +54,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link

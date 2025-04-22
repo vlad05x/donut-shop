@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Heart, ShoppingBag, X } from "lucide-react"
-import { useShop } from "@/context/shop-context"
+import { useShop, Product } from "@/context/shop-context"
 import { toast } from "@/components/ui/use-toast"
 
-const products = [
+const products: Product[] = [
   {
     id: 1,
     name: "Strawberry Bliss",
@@ -69,7 +69,6 @@ const products = [
 export default function Favorites() {
   const { favorites, toggleFavorite, addToCart } = useShop()
 
-  // Get the favorite products by filtering the products array
   const favoriteProducts = products.filter((product) => favorites.includes(product.id))
 
   const handleRemoveFromFavorites = (id: number, name: string) => {
@@ -80,7 +79,7 @@ export default function Favorites() {
     })
   }
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product)
     toast({
       title: "Added to cart",

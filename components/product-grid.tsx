@@ -10,62 +10,61 @@ import { useShop, type Product } from "@/context/shop-context"
 import { toast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 
-// Sample product data
 const products = [
   {
     id: 1,
     name: "Strawberry Bliss",
     price: 4.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/StrawberryDonut.png",
     tags: ["glazed", "fruit", "bestseller"],
   },
   {
     id: 2,
     name: "Chocolate Dream",
     price: 5.49,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/ChocolateDonut.png",
     tags: ["chocolate", "bestseller"],
   },
   {
     id: 3,
     name: "Vanilla Cloud",
     price: 4.49,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/VanillaDonut.png",
     tags: ["glazed", "classic"],
   },
   {
     id: 4,
     name: "Maple Bacon",
     price: 6.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/MapleBaconDonut.png",
     tags: ["specialty", "savory"],
   },
   {
     id: 5,
     name: "Blueberry Burst",
     price: 5.29,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/BlueberryDonut.png",
     tags: ["fruit", "glazed"],
   },
   {
     id: 6,
     name: "Caramel Crunch",
     price: 5.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/CaramelDonut.png",
     tags: ["specialty", "nuts"],
   },
   {
     id: 7,
     name: "Matcha Green Tea",
     price: 5.49,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/MatchaDonut.png",
     tags: ["specialty", "vegan"],
   },
   {
     id: 8,
     name: "Lemon Poppy",
     price: 4.79,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/images/LemonDonut.png",
     tags: ["fruit", "vegan"],
   },
 ]
@@ -128,7 +127,7 @@ export default function ProductGrid() {
       </div>
 
       {/* Product grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div id="products" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <AnimatePresence>
           {filteredProducts.map((product) => (
             <motion.div
